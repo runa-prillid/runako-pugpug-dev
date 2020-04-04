@@ -1,0 +1,46 @@
+//- json全体をが渡って来ないのでココは不要になった。
+//- block vars
+//-   - function getNo(){
+//-   -   for(var i = 0; i < planList.length; i++){
+//-   -     if(planList[i].no === Number(fileName)){
+//-   -       return i;
+//-   -     }
+//-   -   }
+//-   - }
+//-   - const i = getNo()
+- var path_1x_2018= "images/2018/";
+- var path_2x_2018= "images/2018/";
+
+
+// タグ展開するときコメントアウト外す
+//include mixin/_set_plan.pug
+ 
+
+
+html
+  head
+    meta(charset="utf-8")
+    title プラン#{planList.no} - #{planList.title}
+
+  body
+    h1 #{planList.title}
+    p #{planList.text}
+    ul
+      li.main_item
+        .mov_image
+          a(href=planList.url data-rel="lightcase:mainContents")
+            img(src=path_1x_2018 + planList.no + '.png',srcset=path_1x_2018 + planList.no + '.png 1x,' + path_2x_2018 + planList.no + '@2x.png 2x,' alt=planList.title)
+        .mov_item
+          span.mov_no #{planList.no}
+          h4.mov_title #{planList.title}：#{planList.sub}
+        .mov_text
+          h5.mov_genre
+            .back
+              span  #{planList.theme}
+          p #{planList.text}
+  
+    // タグ展開するときコメントアウト外す
+      ul
+        each plan in planList
+          +set_plan(plan.no, plan.title, plan.url, plan.sub, plan.theme, plan.text)
+        

@@ -1,0 +1,13 @@
+mixin set_plan(_no, _title, _url, _sub, _theme, _text)
+  li.main_item
+    .mov_image
+      a(href=_url data-rel="lightcase:mainContents")
+        img(src=path_1x_2018 + _no + '.png',srcset=path_1x_2018 + _no + '.png 1x,' + path_2x_2018 + _no + '@2x.png 2x,' alt=_title)
+    .mov_item
+      span.mov_no #{_no}
+      h4.mov_title #{_title}：#{_sub}
+    .mov_text
+      h5.mov_genre
+        .back
+          span  #{_theme}
+      p #{_text}

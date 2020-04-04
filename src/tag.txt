@@ -1,0 +1,40 @@
+/**************************************************
+ * task
+ *************************************************/
+// 指定するのが面倒なのでtask名をdefaultに変更
+gulp.task('default', (done) => {
+  const json = JSON.parse(fs.readFileSync(jsonPath));
+  gulp.src(template) //  ./src/pug/planTemplate.pug
+      .pipe(data (function (file){
+        return {
+          'planList': json
+        }
+      }))
+      .pipe(pug({
+        pretty: true
+      }))
+      //.pipe(rename(key.no + ".html"))//出力名を決定
+      .pipe(rename("tag" + ".html"))
+      .pipe(gulp.dest(dest));
+  // gulp4系から明示的に終了のコールバックを実行しないとエラーが出るので追加。
+  done();
+});
+
+for (let key of json) {
+    gulp.src(template) //  ./src/pug/planTemplate.pug
+        .pipe(data (function (file){
+          return {
+            //'fileName': file.path.split('/').pop().replace('.html', ''),ここコメントアウトで良かったｗｗｗｗ
+            // json全体を渡すのをやめた。
+            'planList': key
+          }
+        }))
+        .pipe(pug({
+          pretty: true
+        }))
+        .pipe(rename(key.no + ".html"))//出力名を決定
+        .pipe(gulp.dest(dest));
+  }
+
+
+

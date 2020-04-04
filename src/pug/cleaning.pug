@@ -1,0 +1,25 @@
+html
+  head
+    meta(charset="utf-8")
+    title テスト
+  body
+    h3
+      img(src="img/label-koriyama_small.png" srcset="img/label-koriyama_small.png 1x,img/2x/label-koriyama_small@2x.png 2x" alt="郡山支部")
+    //　***********************郡山方部***********************
+    table.cleaning-list.koriyama
+      caption 郡山方部
+      tbody
+        - for (var x = 0; x < 22; x++)
+          tr
+            th.cleaning-list_name #{list[x].name}
+            td.cleaning-list_tel #{list[x].tel}
+            td.cleaning-list_address <span class="cleaning-list_postalcode">#{list[x].postalCode}</span>#{list[x].address}
+    //　***********************白河方部***********************
+    table.cleaning-list.koriyama
+      caption 田村方部
+      tbody
+        - for (var x = 22; x < 29; x++)
+          tr
+            th.cleaning-list_name #{list[x].name}
+            td.cleaning-list_tel #{list[x].tel}
+            td.cleaning-list_address <span class="cleaning-list_postalcode">#{list[x].postalCode}</span>#{list[x].address}

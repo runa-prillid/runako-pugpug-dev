@@ -1,0 +1,93 @@
+-var imgPath = "<?php echo get_template_directory_uri(); ?>/images/"
+-var gglMap1 = "https://maps.google.co.jp/maps?output=embed&q=" //場所名前までのURL
+-var gglMap2 =  list.lng + "," + list.lat  //緯度経度を設定
+-var gglMap3 = "16"//マップの縮尺を設定
+
+div(class='spot_title_' + list.areaSlug)
+  p(class=list.areaSlug + '_number') #{list.no}
+  h3(class=list.areaSlug + '_cities_about') #{list.name}&nbsp;|&nbsp;#{list.city}
+
+.spot_des.clearfix
+  .spot_photo
+    h3
+      img(width="300" height="230" src!=imgPath + list.no + '.jpg', alt='花の王国ふくしま' + list.name )
+  .spot_txt
+    p #{list.description}
+.spot_info
+  //-summary属性はhtml5で廃止
+  table
+    tr
+      th 花の種類:
+      td #{list.flowerName}
+    tr
+      th 例年の見頃:
+      td #{list.flowerBestTime}
+    tr
+      th 住所:
+      td #{list.flowerAddress}
+    tr
+      th アクセス方法:
+      td #{list.flowerAccess}
+ 
+
+//スタンプ設置場所
+.stamp_point.clearfix
+  h2.stamp スタンプ設置場所
+  .stamp_info.clearfix
+    table.stamp_table.clearfix
+      caption.stamp_caption  #{list.stampCaption}
+      tr
+        th.stamp_th 住所
+        td #{list.stampAddress}
+      tr
+        th.stamp_th 電話番号
+        td #{list.stampTel}
+      tr
+        th.stamp_th 営業時間
+        td #{list.stampHours}
+      tr
+        th.stamp_th 休業日
+        td #{list.stampHoliday}
+      tr
+        th.stamp_th 駐車場
+        td #{list.stampParking}
+      tr
+        th.stamp_th 特記事項
+        td #{list.stampAttention}
+    .stamp_design
+      h2.stamp_design_title 設置スタンプ
+      h3.mb8
+        img(width="100" height="140" src!=imgPath + 'stamp_' + list.areaSlug + '_' + list.stampDesign +'.jpg', alt=list.area + 'スタンプ')
+.googlemap
+  iframe(width="615" height="200" scrolling="no" src!=gglMap1 + list.stampCaption + "&ll=" + gglMap2 + '&z=' + gglMap3, frameborder="0")
+
+
+//-移設先住所が設定されていれば下記のコードを出力
+if list.changeAddress !== "" 
+  //スタンプ移設場所
+  .stamp_point.clearfix
+    h2 スタンプ設置変更先
+    p.sp_change_point
+      img(width="44" height="39" src!=imgPath + 'relocation_check.gif', alt="スタンプ設置に関する注意事項").relocation_check
+      span.relocation_check_char 花の見頃が過ぎると、スタンプの設置場所が下記の場所へ変更になります。ご注意下さい。
+  .si_change
+    table.si_change_table
+      caption.stamp_caption #{list.changeCaption}
+      tr
+        th.stamp_th 住所
+        td #{list.changeAddress}
+      tr
+        th.stamp_th 電話番号
+        td #{list.changeTel}
+      tr
+        th.stamp_th 営業時間
+        td #{list.changeHours}
+      tr
+        th.stamp_th 休業日
+        td #{list.changeHoliday}
+      tr
+        th.stamp_th 駐車場
+        td #{list.changeParking}
+      tr
+        th.stamp_th 特記事項
+        td #{list.changeAttention}
